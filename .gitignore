@@ -1,0 +1,16 @@
+.env
+.idea
+bucket-key.json
+node_modules/
+config/databaseRoot.js
+config/key.js
+config/constant.js
+uploads/
+NEEDTODELETE/
+.nyc_output/
+config/database.js.save/
+coverage/
+*spec.js
+/docs
+/docs/swagger_backup.json
+/docs/swagger.json
