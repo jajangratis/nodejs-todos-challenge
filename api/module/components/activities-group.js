@@ -7,6 +7,10 @@ async function updateCache(data) {
     await redis.set('dataall', JSON.stringify(data))
 }
 
+async function getOneFullQuery(id) {
+    return await db('activities-group').whereRaw(`id = ? and deleted_at is null`, [id])
+}
+
 exports.getAlldata = async () => {
     let data 
     if (await redis.get('dataall') !== null) {
@@ -26,8 +30,10 @@ exports.getOne = async (id) => {
         data = await redis.get('dataall')
         data = JSON.parse(data)
         data = data.filter(x => x.id == id)
+        data = data[0]
     } else {
         data = await db('activities-group').whereRaw(`id = ? and deleted_at is null`, [id])
+        data=data[0]
     }
     return templateResponse('Success', false, 'Success', data)
 }
@@ -41,12 +47,7 @@ exports.deleteOne = async (id) => {
     let cek =  await redis.get('dataall')
     if (cek !== null) {
         cek = JSON.parse(cek)
-        for (let index = 0; index < cek.length; index++) {
-            const dataI = cek[index];
-            if (dataI == id) {
-                deleted_at = newDate
-            }
-        }
+        cek = cek.filter(x => x.id !== id)
         await updateCache(cek)
     }
     return templateResponse('Not Found', false, `Activity with ID ${id} Not Found`, {})
@@ -55,18 +56,23 @@ exports.deleteOne = async (id) => {
 exports.postData = async (email, title) => {
     let data = await db('activities-group').insert({
         email,
-        title
+        title,
+        created_at: new Date()
     }).returning('id')
     let cek =  await redis.get('dataall')
     if (cek !== null) {
+        let newData = await getOneFullQuery(data[0])
         cek = JSON.parse(cek)
-        cek.push(data)
+        cek.push(newData)
         await updateCache(cek)
+    } else {
+        let newData = await getOneFullQuery(data[0])
+        await updateCache([newData.data])
     }
     return templateResponse('Success', false, 'Success', data)
 }
 
-exports.patchData = async (id, email, title) => {
+exports.patchData = async (id, email, title, ) => {
     let data = await db('activities-group').whereRaw(`id = ? and deleted_at is null`, [id]).update({
         email,
         title,
@@ -77,7 +83,8 @@ exports.patchData = async (id, email, title) => {
         cek = JSON.parse(cek)
         for (let index = 0; index < cek.length; index++) {
             const dataI = cek[index];
-            if (dataI == id) {
+            console.log({dataI,id});
+            if (dataI.id == id) {
                 dataI.email = email
                 dataI.title = title
             }

@@ -34,7 +34,8 @@ exports.patchOne = async(req, res) => {
 
 // TODO ITEMS
 exports.getTodoAll = async(req, res) => {
-    let result = await todoItems.getOne()
+    let {activity_group_id} = req.query
+    let result = await todoItems.getAlldata(activity_group_id)
     return res.status(200).json(result);
 }
 
@@ -51,14 +52,14 @@ exports.deleteTodoOne = async(req, res) => {
 }
 
 exports.postTodoOne = async(req, res) => {
-    const {activity_group_id, title} = req.body
+    const {activity_group_id, title, priority} = req.body
     let result = await todoItems.postData(activity_group_id, title, priority)
     return res.status(200).json(result);
 }
 
 exports.patchTodoOne = async(req, res) => {
     const id = req.params.id
-    const {activity_group_id, title, priority} = req.body
-    let result = await todoItems.patchData(id, activity_group_id, title, priority)
+    const {activity_group_id, title, priority, is_active} = req.body
+    let result = await todoItems.patchData(id, activity_group_id, title, priority, is_active)
     return res.status(200).json(result);
 }

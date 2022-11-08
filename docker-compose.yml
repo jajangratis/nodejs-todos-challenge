@@ -6,13 +6,15 @@ services:
     restart: unless-stopped
     env_file: ./.env
     environment:
+      - MYSQL_ROOT_PASSWORD=password
       - MYSQL_DATABASE=activities
       - MYSQL_ALLOW_EMPTY_PASSWORD=1
+      - MYSQL_RANDOM_ROOT_PASSWORD=0
     ports:
       - 3306:3306
     volumes:
       - db:/var/lib/mysql
-      - .docker/setup.sql:/docker-entrypoint-initdb.d/setup.sql
+      - ./setup.sql:/docker-entrypoint-initdb.d/setup.sql
     expose:
       # Opens port 3306 on the container
       - '3306'
@@ -38,11 +40,11 @@ services:
     ports:
       - 3030:3030
     environment:
-      - MYSQL_HOST=$MYSQL_HOST
-      - MYSQL_USER=$MYSQL_USER
-      - MYSQL_PASSWORD=$MYSQL_PASSWORD
-      - MYSQL_DBNAME=$MYSQL_DBNAME
-      - MYSQL_PORT=$MYSQL_PASSWORD
+      - MYSQL_HOST=mysqldb
+      - MYSQL_USER=localhost
+      - MYSQL_PASSWORD=password
+      - MYSQL_DBNAME=activities
+      - MYSQL_PORT=3306
       - REDIS_HOST=cache
       - REDIS_PORT=6379
       - REDIS_INDEX=1
