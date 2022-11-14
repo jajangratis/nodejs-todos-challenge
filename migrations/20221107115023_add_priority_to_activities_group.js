@@ -3,7 +3,7 @@
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-    return knex.schema.alterTable('todo-items', function(t) {
+    return knex.schema.alterTable('todos', function(t) {
         t.string('priority').nullable();
     });
 };
@@ -13,7 +13,7 @@ exports.up = function(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
-    return knex.schema.alterTable('todo-items', function(t) {
+    return knex.schema.alterTable('todos', function(t) {
         t.dropColumn('priority').nullable();
     });
 };

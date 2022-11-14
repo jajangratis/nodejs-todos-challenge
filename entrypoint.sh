@@ -1,0 +1,1 @@
+service redis-server start && npm run migrate && pm2-runtime start app.js -i -1

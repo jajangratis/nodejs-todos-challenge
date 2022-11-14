@@ -4,7 +4,10 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "knex migrate:up",
+    "redisinfo": "docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' redis",
+    "start": "pm2-runtime start ecosystem.config.js --env production"
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +24,7 @@
     "moment": "^2.29.4",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
     "redis": "^3.0.0"
   }
 }

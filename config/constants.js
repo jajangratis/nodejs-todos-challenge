@@ -1,10 +1,11 @@
-exports.templateResponse = (status, success, msg, data, error) => {
+exports.templateResponse = (status, success, message, data, error, code) => {
     return {
         status,
         success,
-        msg,
+        message,
         data,
-        error
+        error,
+        code
     }
 }
 

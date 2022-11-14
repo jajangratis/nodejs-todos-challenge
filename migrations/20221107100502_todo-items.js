@@ -3,7 +3,7 @@
  * @returns { Promise<void> }
  */
 exports.up = function(knex) {
-    return knex.schema.createTable('todo-items', function(t) {
+    return knex.schema.createTable('todos', function(t) {
         t.increments('id').unsigned().primary();
         t.dateTime('created_at').notNull();
         t.dateTime('updated_at').nullable();
@@ -20,5 +20,5 @@ exports.up = function(knex) {
  * @returns { Promise<void> }
  */
 exports.down = function(knex) {
-    return knex.schema.dropTable('todo-items');
+    return knex.schema.dropTable('todos');
 };

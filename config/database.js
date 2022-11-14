@@ -9,7 +9,7 @@ const knex = require('knex')({
         database: process.env.MYSQL_DBNAME,
         port: process.env.MYSQL_PORT
     },
-    // debug: true
+    debug: true
 });
 
 // const knex = require('knex')({
