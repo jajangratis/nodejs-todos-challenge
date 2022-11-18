@@ -1,0 +1,207 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "REST API",
+    "description": ""
+  },
+  "host": "localhost:3000",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/activity-groups": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "title": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/activity-groups/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      },
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                },
+                "title": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    },
+    "/todo-items": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "activity_group_id",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      },
+      "post": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "activity_group_id": {
+                  "example": "any"
+                },
+                "title": {
+                  "example": "any"
+                },
+                "priority": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          }
+        }
+      }
+    },
+    "/todo-items/{id}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      },
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "activity_group_id": {
+                  "example": "any"
+                },
+                "title": {
+                  "example": "any"
+                },
+                "priority": {
+                  "example": "any"
+                },
+                "is_active": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {}
+      }
+    }
+  }
+}

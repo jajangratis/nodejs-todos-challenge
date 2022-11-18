@@ -1,24 +1,24 @@
 version: '3.8'
 
 services:
-  mysqldb:
-    image: mysql:5.7
-    restart: unless-stopped
-    env_file: ./.env
-    environment:
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_DATABASE: activities
-      MYSQL_ALLOW_EMPTY_PASSWORD: 1
-      MYSQL_RANDOM_ROOT_PASSWORD: 0
-    ports:
-      - 3306:3306
-    volumes:
-      - db:/var/lib/mysql
-      - ./setup.sql:/docker-entrypoint-initdb.d/setup.sql
-    expose:
-      # Opens port 3306 on the container
-      - '3306'
-    network_mode: bridge
+  # mysqldb:
+  #   image: mysql:5.7
+  #   restart: unless-stopped
+  #   env_file: ./.env
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: password
+  #     MYSQL_DATABASE: activities
+  #     MYSQL_ALLOW_EMPTY_PASSWORD: 1
+  #     MYSQL_RANDOM_ROOT_PASSWORD: 0
+  #   ports:
+  #     - 3306:3306
+  #   volumes:
+  #     - db:/var/lib/mysql
+  #     - ./setup.sql:/docker-entrypoint-initdb.d/setup.sql
+  #   expose:
+  #     # Opens port 3306 on the container
+  #     - '3306'
+  #   network_mode: bridge
   cache:
     image: redis:6.2-alpine
     restart: unless-stopped
@@ -32,7 +32,7 @@ services:
     network_mode: bridge
   app:
     depends_on:
-      - mysqldb
+      # - mysqldb
       - cache
     build:
       context: .
@@ -41,15 +41,15 @@ services:
     env_file: ./.env
     ports:
       - 3030:3030
-    environment:
-      # MYSQL_HOST: mysqldb
-      MYSQL_USER: localhost
-      MYSQL_PASSWORD: password
-      MYSQL_DBNAME: activities
-      MYSQL_PORT: 3306
-      REDIS_HOST: cache
-      REDIS_PORT: 6379
-      REDIS_INDEX: 1
+    # environment:
+    #   MYSQL_HOST: mysqldb
+    #   MYSQL_USER: localhost
+    #   MYSQL_PASSWORD: password
+    #   MYSQL_DBNAME: activities
+    #   MYSQL_PORT: 3306
+    #   REDIS_HOST: cache
+    #   REDIS_PORT: 6379
+    #   REDIS_INDEX: 1
     stdin_open: true
     tty: true
     expose:

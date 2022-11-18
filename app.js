@@ -4,6 +4,8 @@ const timeout = require('connect-timeout'); //express v4
 const helmet = require('helmet')
 const cors = require('cors')
 const http = require('http')
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger_output.json')
 require('dotenv').config()
 
 const client = require('./config/redis')
@@ -39,8 +41,8 @@ app.use(function (err, req, res, next) {
 /**
  * End Point Access
  */
-// app.use(`/profiling/staging/v3`, router);
 app.use('/', router);
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 app.use(timeout(300000));
 app.use(haltOnTimedout);
 

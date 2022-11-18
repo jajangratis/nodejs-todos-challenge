@@ -90,7 +90,7 @@ exports.postData = async (email, title) => {
             email,
             title,
             created_at: new Date()
-        }).returning('id')
+        })
         let cek =  await redis.get('dataall')
         let newData = await getOneFullQuery(data[0])
         if (cek !== null) {
@@ -120,7 +120,7 @@ exports.patchData = async (id, email, title, ) => {
             email: h.checkNullQueryAll(email) ? existing[0].email: email,
             title: h.checkNullQueryAll(title) ? existing[0].title: title,
             updated_at: new Date()
-        }).returning('id')
+        })
         let cek =  await redis.get('dataall')
         cek = JSON.parse(cek)
         if (cek !== null) {

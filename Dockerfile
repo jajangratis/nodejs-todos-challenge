@@ -3,7 +3,7 @@ FROM node:16
 # Create app directory
 WORKDIR /trian-app
 
-COPY ./setup.sql /docker-entrypoint-initdb.d/
+# COPY ./setup.sql /docker-entrypoint-initdb.d/
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied

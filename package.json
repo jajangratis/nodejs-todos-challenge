@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "migrate": "knex migrate:up",
     "redisinfo": "docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' redis",
-    "start": "pm2-runtime start ecosystem.config.js --env production"
+    "start": "pm2-runtime start ecosystem.config.js --env production",
+    "swagger-autogen": "node swagger.js"
   },
   "author": "",
   "license": "ISC",
@@ -25,6 +26,8 @@
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
-    "redis": "^3.0.0"
+    "redis": "^3.0.0",
+    "swagger-autogen": "^2.22.0",
+    "swagger-ui-express": "^4.6.0"
   }
 }
